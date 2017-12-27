@@ -20,6 +20,7 @@ class CreateSourcesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->comment('用户id');
             $table->string('source',255)->nullable()->comment('来源');
+            $table->tinyInteger('status')->default(1)->comment('1正常，2删除');
         });
     }
 

@@ -21,54 +21,67 @@ Route::get('login', function (){
     return response('not auth',200);
 })->name('login');
 
-Route::post('/logo', 'LogoController@logo'); //µÇÂ¼
-Route::get('/captcha/{tmp}', 'LogoController@captcha'); //ÑéÖ¤Âë
+Route::post('/logo', 'LogoController@logo'); //ç™»å½•
+Route::get('/captcha/{tmp}', 'LogoController@captcha'); //å›¾ç‰‡éªŒè¯ç 
+Route::post('/province', 'CityController@province'); //çœ
+Route::post('/city', 'CityController@city'); //å¸‚
+Route::post('/county', 'CityController@county'); //åŒºå¿
 
-Route::post('/calendar', 'CalendarController@index_housing'); //¶©µ¥ĞÅÏ¢
-Route::post('/types', 'CalendarController@index_type'); //·¿ĞÍÁĞ±í
-Route::post('/housess', 'CalendarController@index_houses'); //·¿¼äÁĞ±í
-Route::post('/adorder', 'AddController@add_order'); //Ìí¼ÓÈë×¡
-Route::post('/adtype', 'AddController@add_type'); //Ìí¼Ó·¿ĞÍ
-Route::post('/houses', 'EditController@houses'); //±à¼­·¿¼äµÄĞÅÏ¢»ØÏÔ
-Route::post('/edhouses', 'EditController@edit_houses'); //±à¼­·¿¼ä
-Route::post('/type', 'EditController@type'); //±à¼­·¿ĞÍĞÅÏ¢»ØÏÔ
-Route::post('/edtype', 'EditController@edit_type'); //±à¼­·¿ĞÍ
-Route::post('/order', 'EditController@order'); //±à¼­¶©µ¥ĞÅÏ¢»ØÏÔ
-Route::post('/edorder', 'EditController@edit_order'); //±à¼­¶©µ¥
-Route::post('/deorder', 'DeleController@deorder'); //È¡ÏûÈë×¡ÓëÈ¡ÏûÆÁ±Î
-Route::post('/detype', 'DeleController@detype');  //É¾³ı·¿ĞÍ
-Route::post('/dehouses', 'DeleController@dehouses'); //É¾³ı·¿¼ä
-Route::post('/statistics', 'StaController@statistics'); //Í³¼Æ
-Route::post('/ordsta', 'StaController@order'); //¶©µ¥
-Route::post('/adsources', 'AddController@add_sources'); //Ìí¼ÓÀ´Ô´
-Route::post('/sources', 'EditController@sources'); //±à¼­À´Ô´µÄĞÅÏ¢»ØÏÔ
-Route::post('/edsources', 'EditController@edit_sources'); //±à¼­·¿¼ä
-Route::post('/sourcess', 'CalendarController@index_sources'); //À´Ô´ÁĞ±í
-Route::post('/wer_add', 'LogoController@wer_add'); //ÑéÖ¤ÑéÖ¤Âë
 
-Route::group(['middleware'=>['auth:api']
-],function(){
-//    Route::post('/calendar', 'CalendarController@index_housing'); //¶©µ¥ĞÅÏ¢
-//    Route::post('/types', 'CalendarController@index_type'); //·¿ĞÍÁĞ±í
-//    Route::post('/housess', 'CalendarController@index_houses'); //·¿¼äÁĞ±í
-//    Route::post('/adorder', 'AddController@add_order'); //Ìí¼ÓÈë×¡
-//    Route::post('/adtype', 'AddController@add_type'); //Ìí¼Ó·¿ĞÍ
-//    Route::post('/houses', 'EditController@houses'); //±à¼­·¿¼äµÄĞÅÏ¢»ØÏÔ
-//    Route::post('/edhouses', 'EditController@edit_houses'); //±à¼­·¿¼ä
-//    Route::post('/type', 'EditController@type'); //±à¼­·¿ĞÍĞÅÏ¢»ØÏÔ
-//    Route::post('/edtype', 'EditController@edit_type'); //±à¼­·¿ĞÍ
-//    Route::post('/order', 'EditController@order'); //±à¼­¶©µ¥ĞÅÏ¢»ØÏÔ
-//    Route::post('/edorder', 'EditController@edit_order'); //±à¼­¶©µ¥
-//    Route::post('/deorder', 'DeleController@deorder'); //È¡ÏûÈë×¡ÓëÈ¡ÏûÆÁ±Î
-//    Route::post('/detype', 'DeleController@detype');  //É¾³ı·¿ĞÍ
-//    Route::post('/dehouses', 'DeleController@dehouses'); //É¾³ı·¿¼ä
-//    Route::post('/statistics', 'StaController@statistics'); //Í³¼Æ
-//    Route::post('/ordsta', 'StaController@order'); //¶©µ¥
-//    Route::post('/adsources', 'AddController@add_sources'); //Ìí¼ÓÀ´Ô´
-//    Route::post('/sources', 'EditController@sources'); //±à¼­À´Ô´µÄĞÅÏ¢»ØÏÔ
-//    Route::post('/edsources', 'EditController@edit_sources'); //±à¼­·¿¼ä
-//    Route::post('/sourcess', 'CalendarController@index_sources'); //À´Ô´ÁĞ±í
-//    Route::post('/wer_add', 'LogoController@wer_add'); //ÑéÖ¤ÑéÖ¤Âë
+Route::post('/wer_add', 'LogoController@wer_add'); //éªŒè¯å›¾ç‰‡éªŒè¯ç å¹¶å‘é€çŸ­ä¿¡
+Route::post('/registr', 'LogoController@registration'); //æäº¤æ³¨å†Œ
+Route::post('/calendar', 'CalendarController@index_housing'); //è®¢å•ä¿¡æ¯
+Route::post('/types', 'CalendarController@index_type'); //æˆ¿å‹åˆ—è¡¨
+Route::post('/housess', 'CalendarController@index_houses'); //æˆ¿é—´åˆ—è¡¨
+Route::post('/adorder', 'AddController@add_order'); //æ·»åŠ å…¥ä½
+Route::post('/adtype', 'AddController@add_type'); //æ·»åŠ æˆ¿å‹
+Route::post('/houses', 'EditController@houses'); //ç¼–è¾‘æˆ¿é—´çš„ä¿¡æ¯å›æ˜¾
+Route::post('/edhouses', 'EditController@edit_houses'); //ç¼–è¾‘æˆ¿é—´
+Route::post('/type', 'EditController@type'); //ç¼–è¾‘æˆ¿å‹ä¿¡æ¯å›æ˜¾
+Route::post('/edtype', 'EditController@edit_type'); //ç¼–è¾‘æˆ¿å‹
+Route::post('/order', 'EditController@order'); //ç¼–è¾‘è®¢å•ä¿¡æ¯å›æ˜¾
+Route::post('/edorder', 'EditController@edit_order'); //ç¼–è¾‘è®¢å•
+Route::post('/deorder', 'DeleController@deorder'); //å–æ¶ˆå…¥ä½ä¸å–æ¶ˆå±è”½
+Route::post('/detype', 'DeleController@detype');  //åˆ é™¤æˆ¿å‹
+Route::post('/dehouses', 'DeleController@dehouses'); //åˆ é™¤æˆ¿é—´
+Route::post('/statistics', 'StaController@statistics'); //ç»Ÿè®¡
+Route::post('/ordsta', 'StaController@order'); //è®¢å•
+Route::post('/adsources', 'AddController@add_sources'); //æ·»åŠ æ¥æº
+Route::post('/sources', 'EditController@sources'); //ç¼–è¾‘æ¥æºçš„ä¿¡æ¯å›æ˜¾
+Route::post('/edsources', 'EditController@edit_sources'); //ç¼–è¾‘æˆ¿é—´
+Route::post('/sourcess', 'CalendarController@index_sources'); //æ¥æºåˆ—è¡¨
+Route::post('/colorlists', 'ColorController@lists'); //é¢œè‰²åˆ—è¡¨
+Route::post('/coloredit', 'ColorController@edit'); //é¢œè‰²å¤‡æ³¨è®¾ç½®
+Route::post('/desources', 'DeleController@desources');  //åˆ é™¤æ¥æº
+
+Route::group(['middleware'=>['client_credentials']],function(){
+//    Route::middleware('client_credentials');
+//    Route::post('/wer_add', 'LogoController@wer_add'); //éªŒè¯å›¾ç‰‡éªŒè¯ç å¹¶å‘é€çŸ­ä¿¡
+//    Route::post('/registr', 'LogoController@registration'); //æäº¤æ³¨å†Œ
+//
+//    Route::post('/calendar', 'CalendarController@index_housing'); //è®¢å•ä¿¡æ¯
+//    Route::post('/types', 'CalendarController@index_type'); //æˆ¿å‹åˆ—è¡¨
+//    Route::post('/housess', 'CalendarController@index_houses'); //æˆ¿é—´åˆ—è¡¨
+//    Route::post('/adorder', 'AddController@add_order'); //æ·»åŠ å…¥ä½
+//    Route::post('/adtype', 'AddController@add_type'); //æ·»åŠ æˆ¿å‹
+//    Route::post('/houses', 'EditController@houses'); //ç¼–è¾‘æˆ¿é—´çš„ä¿¡æ¯å›æ˜¾
+//    Route::post('/edhouses', 'EditController@edit_houses'); //ç¼–è¾‘æˆ¿é—´
+//    Route::post('/type', 'EditController@type'); //ç¼–è¾‘æˆ¿å‹ä¿¡æ¯å›æ˜¾
+//    Route::post('/edtype', 'EditController@edit_type'); //ç¼–è¾‘æˆ¿å‹
+//    Route::post('/order', 'EditController@order'); //ç¼–è¾‘è®¢å•ä¿¡æ¯å›æ˜¾
+//    Route::post('/edorder', 'EditController@edit_order'); //ç¼–è¾‘è®¢å•
+//    Route::post('/deorder', 'DeleController@deorder'); //å–æ¶ˆå…¥ä½ä¸å–æ¶ˆå±è”½
+//    Route::post('/detype', 'DeleController@detype');  //åˆ é™¤æˆ¿å‹
+//    Route::post('/dehouses', 'DeleController@dehouses'); //åˆ é™¤æˆ¿é—´
+//    Route::post('/statistics', 'StaController@statistics'); //ç»Ÿè®¡
+//    Route::post('/ordsta', 'StaController@order'); //è®¢å•
+//    Route::post('/adsources', 'AddController@add_sources'); //æ·»åŠ æ¥æº
+//    Route::post('/sources', 'EditController@sources'); //ç¼–è¾‘æ¥æºçš„ä¿¡æ¯å›æ˜¾
+//    Route::post('/edsources', 'EditController@edit_sources'); //ç¼–è¾‘æˆ¿é—´
+//    Route::post('/sourcess', 'CalendarController@index_sources'); //æ¥æºåˆ—è¡¨
+//    Route::post('/colorlists', 'ColorController@lists'); //é¢œè‰²åˆ—è¡¨
+//    Route::post('/coloredit', 'ColorController@edit'); //é¢œè‰²å¤‡æ³¨è®¾ç½®
+//    Route::post('/desources', 'DeleController@desources');  //åˆ é™¤æ¥æº
 });
 
 

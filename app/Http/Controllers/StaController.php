@@ -142,7 +142,10 @@ class StaController extends Controller
                 $sta_time = strtotime(date('Y-m-d 00:00:00', time()));
                 $com_time = $sta_time + 24*60*60-1;
                 $data = DB::table('orders')
+                    ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                    ->join('sources', 'sources.id', '=', 'orders.source_id')
                     ->join('houses','orders.house_id','=','houses.id')
+                    ->join('colors', 'colors.id', '=', 'orders.color_id')
                     ->where('orders.status',1)
                     ->whereBetween('orders.sta_time', array($sta_time,$com_time))
                     ->Where(function ($query) use($content){
@@ -155,8 +158,12 @@ class StaController extends Controller
                 $sta_time = strtotime(date('Y-m-d 00:00:00', time()));
                 $com_time = $sta_time + 24*60*60-1;
                 $data = DB::table('orders')
-                    ->where('status',1)
-                    ->whereBetween('sta_time', array($sta_time,$com_time))
+                    ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                    ->join('sources', 'sources.id', '=', 'orders.source_id')
+                    ->join('houses','orders.house_id','=','houses.id')
+                    ->join('colors', 'colors.id', '=', 'orders.color_id')
+                    ->where('orders.status',1)
+                    ->whereBetween('orders.sta_time', array($sta_time,$com_time))
                     ->paginate(1);
             }
         }
@@ -165,7 +172,10 @@ class StaController extends Controller
                 $sta_time = strtotime(date('Y-m-d 00:00:00', time()))+24*60*60;
                 $com_time = $sta_time+24*60*60-1;
                 $data = DB::table('orders')
+                    ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                    ->join('sources', 'sources.id', '=', 'orders.source_id')
                     ->join('houses','orders.house_id','=','houses.id')
+                    ->join('colors', 'colors.id', '=', 'orders.color_id')
                     ->where('orders.status',1)
                     ->whereBetween('orders.sta_time', array($sta_time,$com_time))
                     ->Where(function ($query) use($content){
@@ -178,8 +188,12 @@ class StaController extends Controller
                 $sta_time = strtotime(date('Y-m-d 00:00:00', time()))+24*60*60;
                 $com_time = $sta_time+24*60*60-1;
                 $data = DB::table('orders')
-                    ->where('status',1)
-                    ->whereBetween('sta_time', array($sta_time,$com_time))
+                    ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                    ->join('sources', 'sources.id', '=', 'orders.source_id')
+                    ->join('houses','orders.house_id','=','houses.id')
+                    ->join('colors', 'colors.id', '=', 'orders.color_id')
+                    ->where('orders.status',1)
+                    ->whereBetween('orders.sta_time', array($sta_time,$com_time))
                     ->paginate(1);
             }
         }
@@ -188,7 +202,10 @@ class StaController extends Controller
                 $sta_time = strtotime(date('Y-m-d 00:00:00', time()))+24*60*60;
                 $com_time = $sta_time+24*60*60-1;
                 $data = DB::table('orders')
+                    ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                    ->join('sources', 'sources.id', '=', 'orders.source_id')
                     ->join('houses','orders.house_id','=','houses.id')
+                    ->join('colors', 'colors.id', '=', 'orders.color_id')
                     ->where('orders.status',1)
                     ->whereBetween('orders.com_time', array($sta_time,$com_time))
                     ->Where(function ($query) use($content){
@@ -201,8 +218,12 @@ class StaController extends Controller
                 $sta_time = strtotime(date('Y-m-d 00:00:00', time()))+24*60*60;
                 $com_time = $sta_time+24*60*60-1;
                 $data = DB::table('orders')
-                    ->where('status',1)
-                    ->whereBetween('com_time', array($sta_time,$com_time))
+                    ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                    ->join('sources', 'sources.id', '=', 'orders.source_id')
+                    ->join('houses','orders.house_id','=','houses.id')
+                    ->join('colors', 'colors.id', '=', 'orders.color_id')
+                    ->where('orders.status',1)
+                    ->whereBetween('orders.com_time', array($sta_time,$com_time))
                     ->paginate(1);
             }
         }
@@ -211,7 +232,10 @@ class StaController extends Controller
                 $sta_time = strtotime(date('Y-m-d 00:00:00', time()))+24*60*60;
                 $com_time = $sta_time+24*60*60-1;
                 $data = DB::table('orders')
+                    ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                    ->join('sources', 'sources.id', '=', 'orders.source_id')
                     ->join('houses','orders.house_id','=','houses.id')
+                    ->join('colors', 'colors.id', '=', 'orders.color_id')
                     ->where('orders.status',1)
                     ->whereBetween('orders.com_time', array($sta_time,$com_time))
                     ->Where(function ($query) use($content){
@@ -224,8 +248,12 @@ class StaController extends Controller
                 $sta_time = strtotime(date('Y-m-d 00:00:00', time()))+24*60*60;
                 $com_time = $sta_time+24*60*60-1;
                 $data = DB::table('orders')
-                    ->where('status',1)
-                    ->whereBetween('com_time', array($sta_time,$com_time))
+                    ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                    ->join('sources', 'sources.id', '=', 'orders.source_id')
+                    ->join('houses','orders.house_id','=','houses.id')
+                    ->join('colors', 'colors.id', '=', 'orders.color_id')
+                    ->where('orders.status',1)
+                    ->whereBetween('orders.com_time', array($sta_time,$com_time))
                     ->paginate(1);
             }
         }
@@ -233,7 +261,10 @@ class StaController extends Controller
             if($content){
                 if($start_time){
                     $data = DB::table('orders')
+                        ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                        ->join('sources', 'sources.id', '=', 'orders.source_id')
                         ->join('houses','orders.house_id','=','houses.id')
+                        ->join('colors', 'colors.id', '=', 'orders.color_id')
                         ->where('orders.status',1)
                         ->whereBetween('orders.sta_time', array($start_time,$end_time))
                         ->Where(function ($query) use($content){
@@ -244,7 +275,10 @@ class StaController extends Controller
                         ->paginate(1);
                 }else{
                     $data = DB::table('orders')
+                        ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                        ->join('sources', 'sources.id', '=', 'orders.source_id')
                         ->join('houses','orders.house_id','=','houses.id')
+                        ->join('colors', 'colors.id', '=', 'orders.color_id')
                         ->where('orders.status',1)
                         ->Where(function ($query) use($content){
                                 $query->orwhere('orders.name', 'LIKE', "%$content%")
@@ -257,13 +291,21 @@ class StaController extends Controller
             }else{
                 if($start_time){
                     $data = DB::table('orders')
-                        ->where('status',1)
-                        ->whereBetween('sta_time', array($start_time,$end_time))
+                        ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                        ->join('sources', 'sources.id', '=', 'orders.source_id')
+                        ->join('houses','orders.house_id','=','houses.id')
+                        ->join('colors', 'colors.id', '=', 'orders.color_id')
+                        ->where('orders.status',1)
+                        ->whereBetween('orders.sta_time', array($start_time,$end_time))
                         ->paginate(1);
                 }else{
                     if(!$start_time){
                         $data = DB::table('orders')
-                            ->where('status',1)
+                            ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                            ->join('sources', 'sources.id', '=', 'orders.source_id')
+                            ->join('houses','orders.house_id','=','houses.id')
+                            ->join('colors', 'colors.id', '=', 'orders.color_id')
+                            ->where('orders.status',1)
                             ->paginate(1);
                     }
                 }
@@ -273,7 +315,10 @@ class StaController extends Controller
             if($content){
                 if($start_time){
                     $data = DB::table('orders')
+                        ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                        ->join('sources', 'sources.id', '=', 'orders.source_id')
                         ->join('houses','orders.house_id','=','houses.id')
+                        ->join('colors', 'colors.id', '=', 'orders.color_id')
                         ->where('orders.status','>',2)
                         ->whereBetween('orders.sta_time', array($start_time,$end_time))
                         ->Where(function ($query) use($content){
@@ -284,7 +329,10 @@ class StaController extends Controller
                         ->paginate(1);
                 }else{
                     $data = DB::table('orders')
+                        ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                        ->join('sources', 'sources.id', '=', 'orders.source_id')
                         ->join('houses','orders.house_id','=','houses.id')
+                        ->join('colors', 'colors.id', '=', 'orders.color_id')
                         ->where('orders.status','>',2)
                         ->Where(function ($query) use($content){
                             $query->orwhere('orders.name', 'LIKE', "%$content%")
@@ -297,12 +345,20 @@ class StaController extends Controller
             }else{
                 if($start_time){
                     $data = DB::table('orders')
+                        ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                        ->join('sources', 'sources.id', '=', 'orders.source_id')
+                        ->join('houses','orders.house_id','=','houses.id')
+                        ->join('colors', 'colors.id', '=', 'orders.color_id')
                         ->where('orders.status','>',2)
-                        ->whereBetween('sta_time', array($start_time,$end_time))
+                        ->whereBetween('orders.sta_time', array($start_time,$end_time))
                         ->paginate(1);
                 }else{
                     if(!$start_time){
                         $data = DB::table('orders')
+                            ->select('orders.*', 'houses.num', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                            ->join('sources', 'sources.id', '=', 'orders.source_id')
+                            ->join('houses','orders.house_id','=','houses.id')
+                            ->join('colors', 'colors.id', '=', 'orders.color_id')
                             ->where('orders.status','>',2)
                             ->paginate(1);
                     }

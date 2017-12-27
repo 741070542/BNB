@@ -38,6 +38,7 @@ class AddController extends Controller
         if(!$time){
             return get_op_put(1,[],'缺少参数time');
         }
+        $time = explode(',',$time);
         $user_id = user_id($key);  //获取用户id
         $type = DB::table('houses')->where('id',$house_id)->pluck('type_id');
         $type_id = $type[0]; //获取房型id

@@ -105,4 +105,26 @@ class DeleController extends Controller
             return get_op_put(2,[],'删除失败');
         }
     }
+
+    /*
+     * 删除来源
+     */
+    public function desources(Request $request){
+        $key = $request->input('key');
+        if(!$key){
+            return get_op_put(1,[],'缺少参数key');
+        }else{
+            $user_id = user_id($key);  //用户id
+        }
+        $id = $request->input('id');
+        if(!$id){
+            return get_op_put(1,[],'缺少参数id');
+        }
+        $save = DB::table('sources')->where('id',$id)->update(array("status"=>2));
+        if($save == 1){
+            return get_op_put(0,[],'删除成功');
+        }else{
+            return get_op_put(2,[],'删除失败');
+        }
+    }
 }

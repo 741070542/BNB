@@ -19,7 +19,7 @@ class CreateColorsTable extends Migration
             $table->collation = 'utf8_general_ci';
             $table->increments('id');
             $table->integer('user_id')->comment('用户id');
-            $table->tinyInteger('state')->comment('1红色，2橙色，3黄色....');
+            $table->string('state')->comment('颜色值');
             $table->string('remark',255)->nullable()->comment('备注');
         });
     }

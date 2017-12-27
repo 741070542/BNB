@@ -34,17 +34,23 @@ class CalendarController extends Controller
                 $hello[$k] = (int)$v;
             }
             $data = DB::table('orders')
-                ->whereIn('type_id',$hello)
-                ->where('user_id',$user_id)
-                ->where('status','<',3)
-                ->whereBetween('sta_time', array((int)$sta_time, (int)$com_time))
+                ->select('orders.*', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                ->join('sources', 'sources.id', '=', 'orders.source_id')
+                ->join('colors', 'colors.id', '=', 'orders.color_id')
+                ->whereIn('orders.type_id',$hello)
+                ->where('orders.user_id',$user_id)
+                ->where('orders.status','<',3)
+                ->whereBetween('orders.sta_time', array((int)$sta_time, (int)$com_time))
                 ->get()
                 ->toArray();
         }else{
             $data = DB::table('orders')
-                ->where('user_id',$user_id)
-                ->where('status','<',3)
-                ->whereBetween('sta_time', array((int)$sta_time, (int)$com_time))
+                ->select('orders.*', 'sources.source as source_name', 'colors.state', 'colors.remark as colors_remark')
+                ->join('sources', 'sources.id', '=', 'orders.source_id')
+                ->join('colors', 'colors.id', '=', 'orders.color_id')
+                ->where('orders.user_id',$user_id)
+                ->where('orders.status','<',3)
+                ->whereBetween('orders.sta_time', array((int)$sta_time, (int)$com_time))
                 ->get()
                 ->toArray();
         }
@@ -154,7 +160,7 @@ class CalendarController extends Controller
         }else{
             $user_id = user_id($key);
         }
-        $data = DB::table('sources')->where('user_id', $user_id)->get()->toArray();
+        $data = DB::table('sources')->where('user_id', $user_id)->where('status', 1)->get()->toArray();
         if(count($data)){
             $data = comb($data);
             return get_op_put(0,$data,'请求成功');

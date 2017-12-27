@@ -152,6 +152,8 @@ class EditController extends Controller
         }
         $data = DB::table('orders')->where('id',$id)->where('user_id',$user_id)->first();
         if($data){
+            $data = object_array($data);
+            $data['dates'] = ceil(($data['com_time'] - $data['sta_time'])/60/60/24);
             return get_op_put(0,$data,'请求成功');
         }
         return get_op_put(2,[],'无数据');
@@ -186,20 +188,19 @@ class EditController extends Controller
         if(!$color_id){
             return get_op_put(1,[],'缺少参数color_id');
         }
-        $sta_time = $request->input('sta_time');
-        if(!$sta_time){
-            return get_op_put(1,[],'缺少参数sta_time');
-        }
-        $com_time = $request->input('com_time');
-        if(!$com_time){
-            return get_op_put(1,[],'缺少参数com_time');
-        }
+        $time = $request->input('time');
+        $time = explode(',',$time);
         $data = $request->input();
-        unset($data['key']);
-        unset($data['id']);
-        unset($data['type_id']);
-        unset($data['house_id']);
-        unset($data['user_id']);
+        $dasave['status'] = $data['status'];
+        $dasave['source_id'] = $data['source_id'];
+        $dasave['revenue'] = $data['revenue'];
+        $dasave['name'] = $data['name'];
+        $dasave['phone'] = $data['phone'];
+        $dasave['wx'] = $data['wx'];
+        $dasave['remark'] = $data['remark'];
+        $dasave['color_id'] = $data['color_id'];
+        $dasave['sta_time'] = $time[0];
+        $dasave['com_time'] = $time[1];
         $das = DB::table('orders')->where('id',$id)->where('user_id',$user_id)->first();
         $das = object_array($das);
         if($das['status'] !== (int)$status){
@@ -214,10 +215,10 @@ class EditController extends Controller
                 $statistics = object_array($statistics);
                 $save['thismonth_come'] = $statistics['thismonth_come']+1;
                 $save['thismonth_revenue'] = $data['revenue']+$statistics['thismonth_revenue'];
-                DB::table('statistics')->where('user_id',$user_id)->where('firstday',firstday($sta_time))->update($save);
+                DB::table('statistics')->where('user_id',$user_id)->where('firstday',firstday($time[0]))->update($save);
             }
         }
-        DB::table('orders')->where('id',$id)->update($data);
+        DB::table('orders')->where('id',$id)->update($dasave);
         return get_op_put(0,[],'修改成功');
     }
 
